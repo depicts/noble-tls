@@ -7,7 +7,7 @@ from noble_tls.utils.asset import root_dir
 from noble_tls.exceptions.exceptions import TLSClientException
 import httpx
 
-owner = 'bogdanfinn'
+owner = 'depicts'
 repo = 'tls-client'
 url = f'https://api.github.com/repos/{owner}/{repo}/releases/latest'
 root_directory = root_dir()
