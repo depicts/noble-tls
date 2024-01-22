@@ -53,8 +53,11 @@ def generate_asset_name(
             asset_arch = 'arm64'
         elif "x86" in architecture:
             asset_arch = 'amd64'
+            return f"{custom_part}-xgo-{version}-{system_os}-{asset_arch}{file_extension}"
+
         else:
             asset_arch = 'amd64'
+            return f"{custom_part}-xgo-{version}-{system_os}-{asset_arch}{file_extension}"
 
         if system_os == 'linux':
             distro_name = get_distro()
