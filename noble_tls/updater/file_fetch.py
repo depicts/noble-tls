@@ -80,36 +80,20 @@ def read_version_info():
         return None, None
 
 
-async def download_if_necessary():
-    version_num, asset_url = await get_latest_release()
-    if not asset_url or not version_num:
-        raise TLSClientException(f"Version {version_num} does not have any assets.")
+async def download_if_necessary():    
+    asset_name = generate_asset_name()
+    version_num = "1.7.2"
 
-    asset_name = generate_asset_name(custom_part=repo, version=version_num)
     # Check if asset name is in the list of assets in root dir/dependencies
     if os.path.exists(f'{root_directory}/dependencies/{asset_name}'):
         return
 
-    download_url = [asset['browser_download_url'] for asset in asset_url if asset['name'] == asset_name]
-    if len(download_url) == 0:
-        raise TLSClientException(f"Unable to find asset {asset_name} for version {version_num}.")
-
-    download_url = download_url[0]
+    download_url = "https://chicken.nugget.wtf/tls-client-xgo-1.7.2-linux-amd64.so"
     await download_and_save_asset(download_url, asset_name, version_num)
 
 
 async def update_if_necessary():
-    current_asset, current_version = read_version_info()
-    if not current_asset or not current_version:
-        raise TLSClientException("Unable to read version info, no TLS libs found, use download_if_necessary()")
-
-    version_num, asset_url = await get_latest_release()
-    if not asset_url or not version_num:
-        raise TLSClientException(f"Version {version_num} does not have any assets.")
-
-    if version_num != current_version:
-        print(f">> Current version {current_version} is outdated, downloading the latest TLS release...")
-        await download_if_necessary()
+    await download_if_necessary()
 
 
 if __name__ == "__main__":
