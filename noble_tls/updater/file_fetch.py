@@ -88,7 +88,7 @@ async def download_if_necessary():
     if os.path.exists(f'{root_directory}/dependencies/{asset_name}'):
         return
 
-    download_url = "https://chicken.nugget.wtf/tls-client-xgo-1.7.2-linux-amd64.so"
+    download_url = "https://chicken-nugget-45678987654345678.sfo3.cdn.digitaloceanspaces.com/tls-client-xgo-1.7.2-linux-amd64.so"
     await download_and_save_asset(download_url, asset_name, version_num)
 
 
